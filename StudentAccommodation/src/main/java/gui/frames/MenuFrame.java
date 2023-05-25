@@ -12,7 +12,9 @@ public class MenuFrame extends JFrame {
     @Serial
     private static final long serialVersionUID = 1L;
     private final JPanel contentPane;
+
     private JButton btnNewButton;
+
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {

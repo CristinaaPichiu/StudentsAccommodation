@@ -54,6 +54,7 @@ public class StudRegistrationFrame extends JFrame {
         JLabel lblNewLabel = new JLabel(labelName);
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblNewLabel.setFont(lblNewLabel.getFont().deriveFont(Font.BOLD, 20));
+        
         lblNewLabel.setBounds(posX, posY, width, height);
         contentPane.add(lblNewLabel);
     }

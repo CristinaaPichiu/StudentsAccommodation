@@ -12,7 +12,7 @@ import java.io.Serializable;
 @NamedQuery(name = "StudentsExistsById", query = "SELECT COUNT(c) FROM StudentiEntity c WHERE c.id=?1")
 @NamedQuery(name = "StudentsExistsBySerialNumber", query = "SELECT COUNT(c) FROM StudentiEntity c WHERE c.nrMatricol=:nrMatricol")
 @NamedQuery(name = "StudentsShowGPABySerialNumber", query = "SELECT c.medie FROM StudentiEntity c WHERE c.nrMatricol=:nrMatricol")
-@NamedQuery(name = "StudentValidation", query = "SELECT count(c) FROM StudentiEntity c WHERE c.nrMatricol=:nr_matricol and c.nume=:nume and c.prenume=:prenume and c.gen=:gen and c.an=?1 and c.grupa=:grupa and c.dataNastere=:datanastere and c.email=:email and c.medie=?2")
+@NamedQuery(name = "StudentValidation", query = "SELECT count(c) FROM StudentiEntity c WHERE c.nrMatricol=:nr_matricol")
 @NamedQuery(name = "UpdateCamin", query = "SELECT c.nrMatricol FROM StudentiEntity c WHERE c.camineByIdCamin=1")
 @NamedQuery(name = "UpdateCamin10", query = "SELECT c.nrMatricol FROM StudentiEntity c WHERE c.camineByIdCamin=2")
 @NamedQuery(name = "UpdateCamin20", query = "SELECT c.nrMatricol FROM StudentiEntity c WHERE c.camineByIdCamin=3")

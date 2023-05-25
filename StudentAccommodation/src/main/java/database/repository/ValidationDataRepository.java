@@ -1,9 +1,11 @@
 package database.repository;
 
 
+import database.entity.StudentiEntity;
 import database.managerfactory.EntityManager;
 
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Objects;
 
@@ -134,18 +136,29 @@ public class ValidationDataRepository {
         else
             gen1 = "M";
 
+        Query query = entityManager.createQuery("SELECT c FROM StudentiEntity c");
+        List<StudentiEntity> results = query.getResultList();
+        for (StudentiEntity student : results) {
+            System.out.println(student.toString());
+        }
+
+        System.out.println(matricol);
+        System.out.println(lastName);
+        System.out.println(firstName);
+        System.out.println(gen1);
+        System.out.println(anInt);
+        System.out.println(grupa);
+        System.out.println(dataNastere);
+        System.out.println(emailAdress);
+        System.out.println(medieDouble);
+
+
 
         int count = Math.toIntExact((long) entityManager.createNamedQuery("StudentValidation")
                 .setParameter("nr_matricol", matricol)
-                .setParameter("nume", lastName)
-                .setParameter("prenume", firstName)
-                .setParameter("gen", gen1)
-                .setParameter(1, anInt)
-                .setParameter("grupa", grupa)
-                .setParameter("datanastere", dataNastere)
-                .setParameter("email", emailAdress)
-                .setParameter(2, medieDouble)
                 .getSingleResult());
+
+        System.out.println(count);
 
 
         if (count > 0) {

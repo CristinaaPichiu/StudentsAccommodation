@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.io.Serial;
 import java.util.Objects;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 public class StudRegistrationFrame extends JFrame {
@@ -43,7 +44,7 @@ public class StudRegistrationFrame extends JFrame {
         JLabel lblNewUserRegister = new JLabel("Student accommodation");
         lblNewUserRegister.setFont(new Font("Helvetica Neue", Font.PLAIN, 29));
         lblNewUserRegister.setBounds(475, 30, 325, 50);
-        lblNewUserRegister.setForeground(new Color(0x37B2DE));
+        lblNewUserRegister.setForeground(new Color(48, 83, 113));
         contentPane.add(lblNewUserRegister);
     }
     /**
@@ -299,9 +300,13 @@ public class StudRegistrationFrame extends JFrame {
                 exception.printStackTrace();
             }
         });
+        Border roundBorder = new RoundBorder(20);
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
         btnNewButton.setBounds(550, 550, 148, 74);
-        btnNewButton.setForeground(new Color(0x37B2DE));
-        contentPane.add(btnNewButton);
+        btnNewButton.setForeground(new Color(23, 72, 23));
+        btnNewButton.setBorder(roundBorder);
+        btnNewButton.setFocusPainted(false); // Elimină efectul de focus la click
+        btnNewButton.setBackground(new Color(23, 72, 23)); // Setează culoarea de fundal a butonului la verde
+        btnNewButton.setForeground(Color.WHITE);        contentPane.add(btnNewButton);
     }
 }

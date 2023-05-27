@@ -27,17 +27,17 @@ public class DistributionFrame extends JPanel implements ActionListener {
 
     public static void showFrame() {
         JPanel mainPanel = new DistributionFrame();
-        mainPanel.setPreferredSize(new Dimension(1280, 720));
+        mainPanel.setPreferredSize(new Dimension(975, 657));
         mainPanel.setOpaque(true);
-        mainPanel.setBackground(new Color(0xD2D6D9));
+        mainPanel.setBackground(new Color(250, 248, 249));
 
-        JFrame frame = new JFrame("Student Distribution for 2022");
+        JFrame frame = new JFrame("Student Distribution for 2023");
         frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         frame.setContentPane(mainPanel);
         frame.pack();
         frame.setVisible(true);
         frame.setResizable(false);
-        frame.setBackground(new Color(0xD2D6D9));
+        frame.setBackground(new Color(250, 248, 249));
     }
 
     /**
@@ -45,25 +45,35 @@ public class DistributionFrame extends JPanel implements ActionListener {
      */
     private void setupButtonsPanel() {
         buttonsPanel.setPreferredSize(new Dimension(1280, 50));
-        buttonsPanel.setBackground(new Color(0xD2D6D9));
+        buttonsPanel.setBackground(new Color(250, 248, 249));
 
-        JLabel dormitoryLabel = new JLabel("Choose dormitory for distribution");
-        dormitoryLabel.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        dormitoryLabel.setBounds(0, 0, 150, 50);
-        dormitoryLabel.setForeground(new Color(0x37B2DE));
+        JLabel dormitoryLabel = new JLabel("Choose dormitory for distribution: ");
+        dormitoryLabel.setFont(new Font("Helvetica Neue", Font.BOLD, 23));
+        dormitoryLabel.setBounds(10, 30, 150, 70);
+        dormitoryLabel.setForeground(new Color(29, 5, 105));
         buttonsPanel.add(dormitoryLabel);
 
-        jButton1 = new JButton("Student Dormitory 1");
-        jButton2 = new JButton("Student Dormitory 2");
-        jButton3 = new JButton("Student Dormitory 3");
-        jButton4 = new JButton("Student Dormitory 4");
-        jButton5 = new JButton("Student Dormitory 5");
+        jButton1 = new JButton("Dormitory 1");
+        jButton2 = new JButton("Dormitory 2");
+        jButton3 = new JButton("Dormitory 3");
+        jButton4 = new JButton("Dormitory 4");
+        jButton5 = new JButton("Dormitory 5");
 
-        jButton1.setForeground(new Color(0x37B2DE));
-        jButton2.setForeground(new Color(0x37B2DE));
-        jButton3.setForeground(new Color(0x37B2DE));
-        jButton4.setForeground(new Color(0x37B2DE));
-        jButton5.setForeground(new Color(0x37B2DE));
+        jButton1.setBackground(new Color(29, 5, 105));
+        jButton1.setForeground(Color.WHITE);
+        jButton1.setFocusPainted(false);
+        jButton2.setBackground(new Color(29, 5, 105));
+        jButton2.setForeground(Color.WHITE);
+        jButton2.setFocusPainted(false);
+        jButton3.setBackground(new Color(29, 5, 105));
+        jButton3.setForeground(Color.WHITE);
+        jButton3.setFocusPainted(false);
+        jButton4.setBackground(new Color(29, 5, 105));
+        jButton4.setForeground(Color.WHITE);
+        jButton4.setFocusPainted(false);
+        jButton5.setBackground(new Color(29, 5, 105));
+        jButton5.setForeground(Color.WHITE);
+        jButton5.setFocusPainted(false);
     }
 
     /**
@@ -110,7 +120,7 @@ public class DistributionFrame extends JPanel implements ActionListener {
      * Table settings
      */
     private void setupTablePanel() {
-        tablePanel.setPreferredSize(new Dimension(1280, 670));
+        tablePanel.setPreferredSize(new Dimension(975, 657));
         tablePanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLUE));
     }
 

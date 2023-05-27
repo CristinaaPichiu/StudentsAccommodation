@@ -16,7 +16,6 @@ public class StudentRepository {
         javax.persistence.EntityManager entityManager = EntityManager.getEntityManagerFactory().createEntityManager();
 
         TypedQuery<StudentiEntity> query = entityManager.createNamedQuery("StudentsShowAll", StudentiEntity.class);
-        ;
         List<StudentiEntity> studentsList = query.getResultList();
 
         entityManager.close();
@@ -103,7 +102,7 @@ public class StudentRepository {
      *
      * @return
      */
-   /* public List<StudentiEntity> ShowStudentsDormitory5() {
+    public List<StudentiEntity> ShowStudentsDormitory5() {
         javax.persistence.EntityManager entityManager = EntityManager.getEntityManagerFactory().createEntityManager();
 
         TypedQuery<StudentiEntity> query = entityManager.createNamedQuery("ShowStudentsDormitory5", StudentiEntity.class);
@@ -111,5 +110,5 @@ public class StudentRepository {
 
         entityManager.close();
         return orderedStudentsList;
-    }*/
+    }
 }

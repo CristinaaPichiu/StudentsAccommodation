@@ -15,7 +15,7 @@ class StudentDistributionTableModel extends AbstractTableModel {
     public StudentDistributionTableModel(int flag) {
         data = new ArrayList<>();
         StudentRepository studRepo = new StudentRepository();
-        List<StudentiEntity> studs=new ArrayList<>();
+        List<StudentiEntity> studs;
 
         if (flag == 1) {
             studs = studRepo.ShowStudentsDormitory1();
@@ -25,9 +25,9 @@ class StudentDistributionTableModel extends AbstractTableModel {
             studs = studRepo.ShowStudentsDormitory3();
         } else if (flag == 4) {
             studs = studRepo.ShowStudentsDormitory4();
-        } /*else {
+        } else {
             studs = studRepo.ShowStudentsDormitory5();
-        }*/
+        }
 
         for (StudentiEntity student : studs) {
             List<Object> information = new ArrayList<>();

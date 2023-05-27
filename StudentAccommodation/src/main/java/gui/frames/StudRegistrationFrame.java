@@ -42,9 +42,9 @@ public class StudRegistrationFrame extends JFrame {
      */
     private void settingTitle() {
         JLabel lblNewUserRegister = new JLabel("Student accommodation");
-        lblNewUserRegister.setFont(new Font("Helvetica Neue", Font.PLAIN, 29));
-        lblNewUserRegister.setBounds(475, 30, 325, 50);
-        lblNewUserRegister.setForeground(new Color(48, 83, 113));
+        lblNewUserRegister.setFont(new Font("Helvetica Neue", Font.BOLD, 35));
+        lblNewUserRegister.setBounds(320, 30, 550, 50);
+        lblNewUserRegister.setForeground(new Color(29, 5, 105));
         contentPane.add(lblNewUserRegister);
     }
     /**
@@ -54,7 +54,7 @@ public class StudRegistrationFrame extends JFrame {
         JLabel lblNewLabel = new JLabel(labelName);
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblNewLabel.setFont(lblNewLabel.getFont().deriveFont(Font.BOLD, 20));
-        
+        lblNewLabel.setForeground(new Color(29, 5, 105));
         lblNewLabel.setBounds(posX, posY, width, height);
         contentPane.add(lblNewLabel);
     }
@@ -67,6 +67,7 @@ public class StudRegistrationFrame extends JFrame {
 
         lastname = new JTextField();
         lastname.setFont(new Font("Tahoma", Font.PLAIN, 32));
+
         lastname.setBounds(posX + 156, posY - 8, 228, 50);
         contentPane.add(lastname);
         lastname.setColumns(10);
@@ -180,7 +181,7 @@ public class StudRegistrationFrame extends JFrame {
         settingLabels(posX, posY - 30, 200, 29, "Date of birth");
 
         UtilDateModel model = new UtilDateModel();
-        model.setDate(1975, 1, 1);
+        model.setDate(1995, 1, 1);
         model.setSelected(true);
 
         JDatePanelImpl datePanel = new JDatePanelImpl(model);
@@ -240,7 +241,7 @@ public class StudRegistrationFrame extends JFrame {
     private void frameProperties() {
         setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/student.png"));
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setBounds(0, 0, 1280, 720);
+        setBounds(0, 0, 975, 657);
         setResizable(false);
     }
 

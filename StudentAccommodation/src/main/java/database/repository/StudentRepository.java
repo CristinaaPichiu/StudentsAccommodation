@@ -7,6 +7,44 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class StudentRepository {
+    /** Create */
+    public void addStudent(StudentiEntity student) {
+        javax.persistence.EntityManager entityManager = EntityManager.getEntityManagerFactory().createEntityManager();
+        entityManager.getTransaction().begin();
+
+        entityManager.persist(student);
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
+    /** Update */
+    public void updateStudent(StudentiEntity student) {
+        javax.persistence.EntityManager entityManager = EntityManager.getEntityManagerFactory().createEntityManager();
+        entityManager.getTransaction().begin();
+
+        entityManager.merge(student);
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
+    /** Delete */
+    public void deleteStudent(StudentiEntity student) {
+        javax.persistence.EntityManager entityManager = EntityManager.getEntityManagerFactory().createEntityManager();
+        entityManager.getTransaction().begin();
+
+        StudentiEntity existingStudent = entityManager.find(StudentiEntity.class, student.getId());
+        if (existingStudent != null) {
+            entityManager.remove(existingStudent);
+        }
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
+    /** Read */
+
     /**
      * This method implements a query that displays all students in the <students> table.
      *

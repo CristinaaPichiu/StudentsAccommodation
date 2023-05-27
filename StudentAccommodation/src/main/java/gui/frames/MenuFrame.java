@@ -1,6 +1,9 @@
 package gui.frames;
 
 
+import database.entity.StudentiEntity;
+import database.repository.StudentRepository;
+
 import java.awt.*;
 import java.io.Serial;
 import javax.swing.*;
@@ -17,6 +20,14 @@ public class MenuFrame extends JFrame {
 
 
     public static void main(String[] args) {
+        StudentiEntity studentiEntity= new StudentiEntity(126, "121231", "Bojescu", "Bianca",2,"B4","12.03.2001","F","bianca@byahoo.com",8.2,true,1);
+        StudentRepository studentRepository = new StudentRepository();
+        StudentiEntity studentUpdate = new StudentiEntity(126, "121231", "Bojescu", "Bianca",2,"B4","12.03.2001","F","bojescu@yahoo.com",9.5,true,2);
+
+        //studentRepository.addStudent(studentiEntity);
+        //studentRepository.updateStudent(studentUpdate);
+        //studentRepository.deleteStudent(studentUpdate);
+
         EventQueue.invokeLater(() -> {
             try {
                 MenuFrame frame = new MenuFrame();
@@ -121,4 +132,5 @@ public class MenuFrame extends JFrame {
         backgroundLabel.setVerticalAlignment(SwingConstants.CENTER);
         contentPane.add(backgroundLabel,1);
     }
+
 }

@@ -67,6 +67,24 @@ public class StudentiEntity implements Serializable {
     @Column(name = "id_camin")
     private Integer camineByIdCamin;
 
+    public StudentiEntity() {
+    }
+
+    public StudentiEntity(int id, String nrMatricol, String nume, String prenume, Integer an, String grupa, String dataNastere, String gen, String email, Double medie, Boolean inregistrat, Integer camineByIdCamin) {
+        this.id = id;
+        this.nrMatricol = nrMatricol;
+        this.nume = nume;
+        this.prenume = prenume;
+        this.an = an;
+        this.grupa = grupa;
+        this.dataNastere = dataNastere;
+        this.gen = gen;
+        this.email = email;
+        this.medie = medie;
+        this.inregistrat = inregistrat;
+        this.camineByIdCamin = camineByIdCamin;
+    }
+
     public int getId() {
         return id;
     }

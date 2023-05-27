@@ -232,14 +232,14 @@ public class StudRegistrationFrame extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         setLocationRelativeTo(null);
-        contentPane.setBackground(new Color(0xD2D6D9));
+        contentPane.setBackground(new Color(250, 248, 249));
     }
 
     /**
      * Frame settings
      */
     private void frameProperties() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/student.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/students.png"));
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setBounds(0, 0, 1280, 700);
         setResizable(false);

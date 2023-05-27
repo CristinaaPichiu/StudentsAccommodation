@@ -43,7 +43,7 @@ public class StudRegistrationFrame extends JFrame {
     private void settingTitle() {
         JLabel lblNewUserRegister = new JLabel("Student accommodation");
         lblNewUserRegister.setFont(new Font("Helvetica Neue", Font.BOLD, 35));
-        lblNewUserRegister.setBounds(320, 30, 550, 50);
+        lblNewUserRegister.setBounds(475, 30, 500, 50);
         lblNewUserRegister.setForeground(new Color(29, 5, 105));
         contentPane.add(lblNewUserRegister);
     }
@@ -67,11 +67,11 @@ public class StudRegistrationFrame extends JFrame {
 
         lastname = new JTextField();
         lastname.setFont(new Font("Tahoma", Font.PLAIN, 32));
-
         lastname.setBounds(posX + 156, posY - 8, 228, 50);
         contentPane.add(lastname);
         lastname.setColumns(10);
     }
+
 
     /**
      * First name settings
@@ -170,7 +170,7 @@ public class StudRegistrationFrame extends JFrame {
 
         gpaField = new JTextField();
         gpaField.setFont(new Font("Tahoma", Font.PLAIN, 32));
-        gpaField.setBounds(posX + 156, posY - 8, 228, 50);
+        gpaField.setBounds(posX + 156, posY - 20, 228, 50);
         contentPane.add(gpaField);
     }
 
@@ -178,7 +178,7 @@ public class StudRegistrationFrame extends JFrame {
      * Date of birth settings
      */
     private void settingDateOfBirth(int posX, int posY) {
-        settingLabels(posX, posY - 30, 200, 29, "Date of birth");
+        settingLabels(posX, posY - 50, 200, 29, "Date of birth");
 
         UtilDateModel model = new UtilDateModel();
         model.setDate(1995, 1, 1);
@@ -241,7 +241,7 @@ public class StudRegistrationFrame extends JFrame {
     private void frameProperties() {
         setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/student.png"));
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setBounds(0, 0, 975, 657);
+        setBounds(0, 0, 1280, 700);
         setResizable(false);
     }
 
@@ -305,10 +305,10 @@ public class StudRegistrationFrame extends JFrame {
         Border roundBorder = new RoundBorder(20);
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
         btnNewButton.setBounds(550, 550, 148, 74);
-        btnNewButton.setForeground(new Color(23, 72, 23));
+        btnNewButton.setForeground(new Color(46, 22, 108));
         btnNewButton.setBorder(roundBorder);
         btnNewButton.setFocusPainted(false); // Elimină efectul de focus la click
-        btnNewButton.setBackground(new Color(23, 72, 23)); // Setează culoarea de fundal a butonului la verde
+        btnNewButton.setBackground(new Color(46, 22, 108)); // Setează culoarea de fundal a butonului la verde
         btnNewButton.setForeground(Color.WHITE);        contentPane.add(btnNewButton);
     }
 }

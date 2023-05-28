@@ -36,7 +36,7 @@ CREATE OR REPLACE FUNCTION build_json (
     p_id4     INTEGER,
     p_id5     INTEGER,
     p_initial INTEGER
-) RETURNS JSON AS
+) RETURNS VARCHAR AS
 $$
 DECLARE 
 	v_index   INTEGER;
@@ -48,7 +48,8 @@ DECLARE
 	v_count1  INTEGER;
 	it RECORD;
 	it2 RECORD;
-	json      JSON;
+	json      json;
+	jsonStrg VARCHAR;
 BEGIN
 	v_count := 0;
 	v_count1 := 0;
@@ -130,12 +131,12 @@ BEGIN
 		END LOOP;
 	END LOOP;
 
-	json := json || json_build_object(
+	jsonStrg := json::VARCHAR || json_build_object(
 		'id', p_id2,
 		'nume', v_nume,
 		'prenume', v_prenume,
 		'colegi', v_index
-	);
+	)::VARCHAR;
 
 	v_index := 0;
 
@@ -172,12 +173,12 @@ BEGIN
 		END LOOP;
 	END LOOP;
 
-	json := json || json_build_object(
+	jsonStrg := jsonStrg || json_build_object(
 		'id', p_id3,
 		'nume', v_nume,
 		'prenume', v_prenume,
 		'colegi', v_index
-	);
+	)::VARCHAR;
 
 	v_index := 0;
 
@@ -214,12 +215,12 @@ BEGIN
 		END LOOP;
 	END LOOP;
 
-	json := json || json_build_object(
+	jsonStrg := jsonStrg || json_build_object(
 		'id', p_id4,
 		'nume', v_nume,
 		'prenume', v_prenume,
 		'colegi', v_index
-	);
+	)::VARCHAR;
 
 	v_index := 0;
 
@@ -256,14 +257,14 @@ BEGIN
 		END LOOP;
 	END LOOP;
 
-	json := json || json_build_object(
+	jsonStrg := jsonStrg || json_build_object(
 		'id', p_id5,
 		'nume', v_nume,
 		'prenume', v_prenume,
 		'colegi', v_index
-	);
+	)::VARCHAR;
 
-	RETURN json;
+	RETURN jsonStrg;
 END;
 $$
 LANGUAGE plpgsql;
@@ -319,7 +320,7 @@ DECLARE
     v_rezultat VARCHAR(1000) := '';
     v_index    INTEGER;
     colegii  VARCHAR[];
-    v_numara   INTEGER := 0;
+    v_numara   INTEGER := 1;
     v_maxim1   INTEGER := 0;
     v_maxim2   INTEGER := 0;
     v_maxim3   INTEGER := 0;
@@ -331,10 +332,13 @@ DECLARE
     v_id4      INTEGER;
     v_id5      INTEGER;
     v_string   VARCHAR(1000);
+	swapped    BOOLEAN;
+	tmp VARCHAR;
 	c RECORD;
 	i RECORD;
 BEGIN
     v_index := 1;
+	colegii := ARRAY[]::VARCHAR[];
     FOR c IN (
         SELECT
             id_student1
@@ -372,11 +376,63 @@ BEGIN
         END LOOP;
 
     END LOOP;
+	
+	 FOR c IN (
+        SELECT
+            id_student2
+        FROM
+            colegi
+        WHERE
+            id_student1 = p_id
+    ) LOOP
+        v_id := 0;
+        FOR i IN (
+            SELECT
+                id_student1
+            FROM
+                colegi
+            WHERE
+                id_student2 = c.id_student2
+        ) LOOP
+            IF ( verifica_colegi(i.id_student1, p_id) = 1 ) THEN
+                colegii[v_index] := i.id_student1;
+                v_index := v_index + 1;
+            END IF;
+        END LOOP;
 
-    -- Sortarea array-ului
-    colegii := ARRAY(
-        SELECT unnest(colegii) ORDER BY unnest(colegii)
-    );
+        FOR i IN (
+            SELECT
+                id_student2
+            FROM
+                colegi
+            WHERE
+                id_student1 = c.id_student2
+        ) LOOP
+            IF ( verifica_colegi(i.id_student2, p_id) = 1 ) THEN
+                colegii[v_index] := i.id_student2;
+                v_index := v_index + 1;
+            END IF;
+        END LOOP;
+
+    END LOOP;
+
+    LOOP
+    swapped := false;
+    FOR i IN 2..array_length(colegii, 1) LOOP
+        IF colegii[i - 1] > colegii[i] THEN
+            tmp := colegii[i];
+            colegii[i] := colegii[i - 1];
+            colegii[i - 1] := tmp;
+            swapped := true;
+        END IF;
+    END LOOP;
+
+    EXIT WHEN NOT swapped;
+END LOOP;
+
+    FOR i IN 1..array_length(colegii, 1) LOOP
+        Raise Notice 'Elementele din vectorul sortat sunt: %' , colegii[i];
+	END LOOP;
 
     v_maxim1 := 0;
     v_maxim2 := 0;
@@ -386,46 +442,49 @@ BEGIN
     FOR i IN 2..array_length(colegii, 1) LOOP
         IF colegii[i - 1] = colegii[i] THEN
             v_numara := v_numara + 1;
+			RAISE NOTICE 'v_numara = %', v_numara;
         ELSE
-            IF ( v_numara > v_maxim1 ) THEN
+            IF (v_numara > v_maxim1 ) THEN
+				RAISE  NOTICE 'v_numara = %', v_numara;
                 v_maxim5 := v_maxim4;
                 v_maxim4 := v_maxim3;
                 v_maxim3 := v_maxim2;
                 v_maxim2 := v_maxim1;
-                v_maxim1 := v_numara;
+                v_maxim1 := v_numara+2;
                 v_id1 := colegii[i - 1];
+				RAISE NOTICE 'v_id1 = %', v_id1;
             ELSIF ( v_numara > v_maxim2 ) THEN
+				RAISE NOTICE 'v_numara = %', v_numara;
                 v_maxim5 := v_maxim4;
                 v_maxim4 := v_maxim3;
                 v_maxim3 := v_maxim2;
-                v_maxim2 := v_numara;
+                v_maxim2 := v_numara+2;
                 v_id2 := colegii[i - 1];
+				RAISE NOTICE 'v_id2 = %', v_id2;
             ELSIF ( v_numara > v_maxim3 ) THEN
+				RAISE NOTICE 'v_numara = %', v_numara;
                 v_maxim5 := v_maxim4;
                 v_maxim4 := v_maxim3;
-                v_maxim3 := v_numara;
+                v_maxim3 := v_numara+2;
                 v_id3 := colegii[i - 1];
+				RAISE NOTICE 'v_id3 = %', v_id3;
             ELSIF ( v_numara > v_maxim4 ) THEN
+				RAISE NOTICE 'v_numara = %', v_numara;
                 v_maxim5 := v_maxim4;
-                v_maxim4 := v_numara;
+                v_maxim4 := v_numara+2;
                 v_id4 := colegii[i - 1];
+				RAISE NOTICE 'v_id3 = %', v_id3;
             ELSIF ( v_numara > v_maxim5 ) THEN
-                v_maxim5 := v_numara;
+				RAISE NOTICE 'v_numara = %', v_numara;
+                v_maxim5 := v_numara+2;
                 v_id5 := colegii[i - 1];
+				RAISE NOTICE 'v_id4 = %', v_id4;
             END IF;
 
-            v_numara := 0;
         END IF;
     END LOOP;
 
-    v_string := json_build_object(
-        'id1', v_id1,
-        'id2', v_id2,
-        'id3', v_id3,
-        'id4', v_id4,
-        'id5', v_id5,
-        'p_id', p_id
-    )::VARCHAR;
+    v_string := build_json(v_id1,v_id2,v_id3,v_id4,v_id5,p_id);
 
     RETURN v_string;
 END;

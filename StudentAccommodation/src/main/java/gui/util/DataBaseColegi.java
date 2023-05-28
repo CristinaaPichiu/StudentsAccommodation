@@ -42,16 +42,18 @@ public class DataBaseColegi {
             prepStmt.setInt(3, indexClass);
             prepStmt.setString(4, nameClass);
             ResultSet rs1 = prepStmt.executeQuery();
+            Integer id = 0;
 
             while(rs1.next()) {
-        System.out.println("Studentul cu datele introduse are id-ul:" + rs1.getInt(1));
-    }
+                System.out.println("Studentul cu datele introduse are id-ul: " + rs1.getInt(1));
+                id = rs1.getInt(1);
+            }
 
             CallableStatement cstmt = con.prepareCall("{? = call how_many_colleagues(?)}");
             //Registering the out parameter of the function (return type)
             cstmt.registerOutParameter(1, Types.INTEGER);
             //Setting the input parameters of the function
-            cstmt.setInt(2, 123);
+            cstmt.setInt(2, id);
 
             //Executing the statement
             cstmt.execute();
@@ -64,7 +66,7 @@ public class DataBaseColegi {
             //Registering the out parameter of the function (return type)
             cstmt.registerOutParameter(1, Types.VARCHAR);
             //Setting the input parameters of the function
-            cstmt.setInt(2,2);
+            cstmt.setInt(2,id);
             //Executing the statement
             cstmt.execute();
 

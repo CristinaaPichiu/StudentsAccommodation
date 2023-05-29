@@ -3,7 +3,7 @@ RETURNS INTEGER AS
 $$
 DECLARE 
 	v_numara INTEGER;
-	v_student_id RECORD; -- Adăugați o variabilă pentru a reține id-ul colegului
+	v_student_id RECORD;
 BEGIN
 	v_numara := 0;
 

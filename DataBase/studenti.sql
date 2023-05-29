@@ -23,7 +23,7 @@ DECLARE
   v_medie numeric(3, 2);
 
 BEGIN
-   RAISE NOTICE 'Inserarea a 1025 studenti...';
+   RAISE NOTICE 'Inserarea a 125 studenti...';
    FOR v_i IN 2..125 LOOP
       v_nume := lista_nume[1+floor(random()*(array_length(lista_nume, 1)-1+1))];
       
